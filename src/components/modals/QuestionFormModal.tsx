@@ -5,6 +5,8 @@ import { Fragment, useState } from 'react';
 import Button from '@/components/buttons/Button';
 import { CancelIcon } from '@/components/icons';
 
+import { useAddNewQuestionMutation } from '@/redux/api/questions';
+
 export default function QuestionFormModal({
   isOpen,
   setIsOpen,
@@ -19,6 +21,7 @@ export default function QuestionFormModal({
     title: '',
     text: '',
   });
+  const [addNewQuestion, { isLoading }] = useAddNewQuestionMutation();
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -111,8 +114,24 @@ export default function QuestionFormModal({
                     </div>
                     <Button
                       size='sm'
+                      isLoading={isLoading}
                       className='py-1 font-bold'
                       disabled={value.text === '' || value.title === ''}
+                      onClick={() => {
+                        try {
+                          addNewQuestion({
+                            title: value.title,
+                            text: value.text,
+                          }).unwrap();
+                          setIsOpen(false);
+                          setValue({
+                            title: '',
+                            text: '',
+                          });
+                        } catch (error) {
+                          setIsOpen(false);
+                        }
+                      }}
                     >
                       Post
                     </Button>
