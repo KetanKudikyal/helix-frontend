@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import React from 'react';
+import React, { memo } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
@@ -54,7 +54,7 @@ export const ExpertUser = ({
   );
 };
 
-export default User;
+export default memo(User);
 
 export const Avatar: React.FC<Partial<ImageProps>> = ({ ...rest }) => {
   return (

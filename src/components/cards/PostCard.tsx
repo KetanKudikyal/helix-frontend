@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Card, { CardTitle } from '@/components/cards';
 import User from '@/components/user';
@@ -48,4 +48,4 @@ export const PostCardLoading = () => {
     </Card>
   );
 };
-export default PostCard;
+export default memo(PostCard);

@@ -135,12 +135,12 @@ export default function QuestionFormModal({
                             };
                           }
                           addNewQuestion(data).unwrap();
-                          setIsOpen(false);
                           setValue({
                             title: '',
                             text: '',
                           });
                           toast.success('New question added successfully');
+                          setIsOpen(false);
                         } catch (error) {
                           toast.error('Oops, something went wrong');
                           setIsOpen(false);
