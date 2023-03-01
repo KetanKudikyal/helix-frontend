@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import { CancelIcon } from '@/components/icons';
@@ -128,7 +129,9 @@ export default function QuestionFormModal({
                             title: '',
                             text: '',
                           });
+                          toast.success('New question added successfully');
                         } catch (error) {
+                          toast.error('Oops, something went wrong');
                           setIsOpen(false);
                         }
                       }}
