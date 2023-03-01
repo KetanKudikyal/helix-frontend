@@ -60,6 +60,13 @@ export default function AddUsername({
             className='flex min-h-full items-center justify-center py-4 text-center'
             onSubmit={(e) => {
               e.preventDefault();
+              if (!username) {
+                return;
+              }
+              if (username && username.length < 3) {
+                toast.error('Username should be atleast of 3 characters');
+                return;
+              }
               loginUser();
             }}
           >

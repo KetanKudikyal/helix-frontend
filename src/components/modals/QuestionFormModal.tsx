@@ -48,7 +48,7 @@ export default function QuestionFormModal({
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
-          <form className='flex min-h-full items-center justify-center py-4 text-center'>
+          <div className='flex min-h-full items-center justify-center py-4 text-center'>
             <Transition.Child
               as={Fragment}
               enter='ease-out duration-300'
@@ -153,7 +153,7 @@ export default function QuestionFormModal({
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-          </form>
+          </div>
         </div>
       </Dialog>
     </Transition>
