@@ -31,6 +31,18 @@ body {
   /* #endregion  /**======== Primary Color =========== */
 }
 
+input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #969696;
+}
+input:focus {
+  outline: none;
+  @apply focus:ring-0 focus:ring-offset-0;
+}
+textarea:focus {
+  @apply focus:ring-0 focus:ring-offset-0;
+}
+
 @layer base {
   /* inter var - latin */
   @font-face {

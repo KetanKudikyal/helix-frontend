@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '@/components/buttons/Button';
+import QuestionFormModal from '@/components/modals/QuestionFormModal';
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className='fixed w-full bg-[#D9D9D9] py-6 px-4'>
-      <div className='container mx-auto flex h-full items-center justify-end '>
-        <Button size='sm'>Ask a question</Button>
-      </div>
-    </header>
+    <>
+      <QuestionFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <header className='fixed w-full bg-[#D9D9D9] py-6 px-4'>
+        <div className='container mx-auto flex h-full items-center justify-end '>
+          <Button
+            size='sm'
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            Ask a question
+          </Button>
+        </div>
+      </header>
+    </>
   );
 };
 
