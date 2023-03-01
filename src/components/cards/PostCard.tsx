@@ -20,7 +20,7 @@ const PostCard: React.FC<
       <p className='text-xs font-bold'>Asked by :</p>
       <User
         user={{
-          user_name: question.username,
+          user_name: question.username as string,
         }}
         className='mt-2'
       />
