@@ -38,7 +38,7 @@ export const ExpertUser = ({
   };
 }) => {
   return (
-    <div className='my-3 flex items-start justify-start'>
+    <div className='my-5 flex items-start justify-start'>
       <Avatar />
       <div className='ml-3'>
         <div className='mb-0 text-[16px] font-bold text-[#6074DD]'>
