@@ -1,15 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react';
-import Image from 'next/image';
 import { Fragment, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import { CancelIcon } from '@/components/icons';
 
-import { useAddNewQuestionMutation } from '@/redux/api/questions';
-import { useTypedSelector } from '@/redux/store';
+import { setUserData } from '@/redux/features';
+import { useAppDispatch } from '@/redux/store';
 
-export default function QuestionFormModal({
+export default function AddUsername({
   isOpen,
   setIsOpen,
 }: {
@@ -23,8 +22,7 @@ export default function QuestionFormModal({
     title: '',
     text: '',
   });
-  const [addNewQuestion, { isLoading }] = useAddNewQuestionMutation();
-  const { user } = useTypedSelector((state) => state.userSlice);
+  const dispatch = useAppDispatch();
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -63,7 +61,7 @@ export default function QuestionFormModal({
                     as='h3'
                     className='text-lg font-bold  leading-6 text-[#34324C]'
                   >
-                    New Question
+                    Add your name
                   </Dialog.Title>
                   <div
                     onClick={() => setIsOpen(false)}
@@ -84,65 +82,34 @@ export default function QuestionFormModal({
                       });
                     }}
                     className='rounded-[20px] border-[1px] border-[#DEDEDE] px-4 py-3 text-[12px] focus:border-[1px] focus:border-[#DEDEDE] focus:outline-none'
-                    placeholder='Enter the question title'
+                    placeholder='Enter your name'
                   />
-                  <textarea
-                    cols={10}
-                    value={value.text}
-                    onChange={(e) => {
-                      setValue({
-                        ...value,
-                        text: e.target.value,
-                      });
-                    }}
-                    placeholder='Write your question here'
-                    className='mt-4 h-[150px] w-full rounded-t-[20px] border-[1px] border-[#DEDEDE] py-3 px-4 text-[12px] focus:border-[1px] focus:border-[#DEDEDE]'
-                  />
-                  <div className='flex justify-between rounded-b-[20px] border-[1px] border-[#DEDEDE] py-3 px-6'>
-                    <div className='flex items-center justify-start'>
-                      <Image
-                        src={require('../../../public/images/aa.png')}
-                        width={20}
-                        height={20}
-                        className='cursor-pointer'
-                        alt='aa'
-                      />
-                      <Image
-                        src={require('../../../public/images/images.png')}
-                        width={20}
-                        height={20}
-                        className='ml-3 cursor-pointer'
-                        alt='image'
-                      />
-                    </div>
+                  <div className='flex justify-end py-3 '>
                     <Button
                       size='sm'
-                      isLoading={isLoading}
                       className='py-1 font-bold'
-                      disabled={value.text === '' || value.title === ''}
+                      disabled={value.title === ''}
                       onClick={() => {
                         try {
-                          if (!user) {
-                            return;
-                          }
-                          addNewQuestion({
-                            title: value.title,
-                            text: value.text,
-                            username: user.username,
-                          }).unwrap();
+                          dispatch(
+                            setUserData({
+                              user: {
+                                username: value.title,
+                              },
+                            })
+                          );
                           setIsOpen(false);
                           setValue({
                             title: '',
                             text: '',
                           });
-                          toast.success('New question added successfully');
                         } catch (error) {
                           toast.error('Oops, something went wrong');
                           setIsOpen(false);
                         }
                       }}
                     >
-                      Post
+                      Login
                     </Button>
                   </div>
                 </div>

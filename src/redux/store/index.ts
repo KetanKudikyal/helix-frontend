@@ -2,6 +2,7 @@ import { configureStore, ConfigureStoreOptions } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { api } from '@/redux/api';
+import { userSlice } from '@/redux/features';
 
 export const createStore = (
   options?: ConfigureStoreOptions['preloadedState'] | undefined
@@ -9,6 +10,7 @@ export const createStore = (
   configureStore({
     reducer: {
       [api.reducerPath]: api.reducer,
+      userSlice: userSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(api.middleware),

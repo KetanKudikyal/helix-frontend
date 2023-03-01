@@ -14,10 +14,7 @@ export const questionsApi = questionWithTags.injectEndpoints({
     }),
     addNewQuestion: build.mutation<
       Question,
-      {
-        title: string;
-        text: string;
-      }
+      Pick<Question, 'text' | 'title' | 'username'>
     >({
       query: (data) => ({
         url: `questions`,
