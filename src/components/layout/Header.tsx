@@ -26,7 +26,7 @@ const Header = () => {
           </Button>
           {user ? (
             <div
-              className='mb-0 cursor-pointer px-4 text-[16px] font-bold text-[#6074DD]'
+              className='mb-0 ml-2 cursor-pointer rounded-md bg-[#969696] px-4 py-2 text-[16px] font-bold text-[#fff]'
               onClick={() => {
                 setUsernameModal(true);
               }}
