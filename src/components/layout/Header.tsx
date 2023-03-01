@@ -16,18 +16,27 @@ const Header = () => {
       <AddUsername isOpen={isUsernameModalOpen} setIsOpen={setUsernameModal} />
       <header className='fixed z-10 w-full bg-[#D9D9D9] py-6 px-4'>
         <div className='container mx-auto flex h-full items-center justify-end '>
+          <Button
+            size='sm'
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            Ask a question
+          </Button>
           {user ? (
-            <Button
-              size='sm'
+            <div
+              className='mb-0 cursor-pointer px-4 text-[16px] font-bold text-[#6074DD]'
               onClick={() => {
-                setIsOpen(true);
+                setUsernameModal(true);
               }}
             >
-              Ask a question
-            </Button>
+              {user.username}
+            </div>
           ) : (
             <Button
               size='sm'
+              className='ml-2'
               onClick={() => {
                 setUsernameModal(true);
               }}

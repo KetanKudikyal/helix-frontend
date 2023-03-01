@@ -15,14 +15,25 @@ export default function AddUsername({
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }) {
-  const [value, setValue] = useState<{
-    title: string;
-    text: string;
-  }>({
-    title: '',
-    text: '',
-  });
+  const [username, setUsername] = useState<string>('');
   const dispatch = useAppDispatch();
+
+  const loginUser = () => {
+    try {
+      dispatch(
+        setUserData({
+          user: {
+            username: username,
+          },
+        })
+      );
+      setIsOpen(false);
+      setUsername('');
+    } catch (error) {
+      toast.error('Oops, something went wrong');
+      setIsOpen(false);
+    }
+  };
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -45,7 +56,13 @@ export default function AddUsername({
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
-          <form className='flex min-h-full items-center justify-center py-4 text-center'>
+          <form
+            className='flex min-h-full items-center justify-center py-4 text-center'
+            onSubmit={(e) => {
+              e.preventDefault();
+              loginUser();
+            }}
+          >
             <Transition.Child
               as={Fragment}
               enter='ease-out duration-300'
@@ -74,12 +91,9 @@ export default function AddUsername({
                 <div className='mt-4 flex flex-col'>
                   <input
                     type='text'
-                    value={value.title}
+                    value={username}
                     onChange={(e) => {
-                      setValue({
-                        ...value,
-                        title: e.target.value,
-                      });
+                      setUsername(e.target.value);
                     }}
                     className='rounded-[20px] border-[1px] border-[#DEDEDE] px-4 py-3 text-[12px] focus:border-[1px] focus:border-[#DEDEDE] focus:outline-none'
                     placeholder='Enter your name'
@@ -88,26 +102,8 @@ export default function AddUsername({
                     <Button
                       size='sm'
                       className='py-1 font-bold'
-                      disabled={value.title === ''}
-                      onClick={() => {
-                        try {
-                          dispatch(
-                            setUserData({
-                              user: {
-                                username: value.title,
-                              },
-                            })
-                          );
-                          setIsOpen(false);
-                          setValue({
-                            title: '',
-                            text: '',
-                          });
-                        } catch (error) {
-                          toast.error('Oops, something went wrong');
-                          setIsOpen(false);
-                        }
-                      }}
+                      disabled={username === ''}
+                      onClick={loginUser}
                     >
                       Login
                     </Button>

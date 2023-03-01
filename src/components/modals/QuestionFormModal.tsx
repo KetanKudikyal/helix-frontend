@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import Button from '@/components/buttons/Button';
 import { CancelIcon } from '@/components/icons';
 
+import { Question } from '@/redux/api/question';
 import { useAddNewQuestionMutation } from '@/redux/api/questions';
 import { useTypedSelector } from '@/redux/store';
 
@@ -122,14 +123,18 @@ export default function QuestionFormModal({
                       disabled={value.text === '' || value.title === ''}
                       onClick={() => {
                         try {
-                          if (!user) {
-                            return;
-                          }
-                          addNewQuestion({
+                          let data: Question = {
                             title: value.title,
                             text: value.text,
-                            username: user.username,
-                          }).unwrap();
+                          };
+                          if (user) {
+                            data = {
+                              title: value.title,
+                              text: value.text,
+                              username: user.username,
+                            };
+                          }
+                          addNewQuestion(data).unwrap();
                           setIsOpen(false);
                           setValue({
                             title: '',

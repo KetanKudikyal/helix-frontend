@@ -1,6 +1,6 @@
 export type Question = {
-  id: string;
+  id?: string;
   title: string;
   text: string;
-  username: string;
+  username?: string;
 };
