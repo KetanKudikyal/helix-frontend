@@ -47,7 +47,7 @@ export const ExpertUser = ({
         <div className='mt-0 flex items-center justify-start text-[12px] font-normal text-[#969696]'>
           47
           <UpvoteIconFill />
-          <span className='ml-2'>collected</span>
+          <span className='ml-1'>collected</span>
         </div>
       </div>
     </div>
