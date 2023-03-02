@@ -15,7 +15,7 @@ const Header = () => {
       <QuestionFormModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <AddUsername isOpen={isUsernameModalOpen} setIsOpen={setUsernameModal} />
       <header className='fixed z-10 w-full bg-[#D9D9D9] py-6 px-4'>
-        <div className='container mx-auto flex h-full items-center justify-end '>
+        <div className='mx-auto flex h-full max-w-6xl items-center justify-end '>
           <Button
             size='sm'
             onClick={() => {

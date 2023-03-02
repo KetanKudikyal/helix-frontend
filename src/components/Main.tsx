@@ -11,8 +11,8 @@ const Main = () => {
   const { data, isLoading, isError, isSuccess } = useGetAllQuestionsQuery();
   return (
     <div className='mb-20 w-full px-4'>
-      <div className='container mx-auto flex  w-full flex-col items-start justify-between   lg:flex-row'>
-        <div className='h-full w-full  md:w-full  lg:w-[75%] lg:pr-4'>
+      <div className='mx-auto flex w-full  max-w-6xl flex-col items-start justify-between   lg:flex-row'>
+        <div className='h-full w-full  md:w-full  lg:w-[70%] lg:pr-4'>
           {isLoading && (
             <>
               {[...new Array(16).fill(8)].map((i, index) => (
@@ -40,7 +40,7 @@ const Main = () => {
             </Card>
           )}
         </div>
-        <div className='h-full w-full  lg:w-[25%] lg:pl-4'>
+        <div className='h-full w-full  lg:w-[30%] lg:pl-4'>
           <AboutCard />
           <ExpertsCard />
         </div>
